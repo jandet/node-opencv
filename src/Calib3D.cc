@@ -133,6 +133,7 @@ void Calib3D::Init(Handle<Object> target)
     NODE_SET_METHOD(obj, "stereoRectify", StereoRectify);
     NODE_SET_METHOD(obj, "computeCorrespondEpilines", ComputeCorrespondEpilines);
     NODE_SET_METHOD(obj, "reprojectImageTo3d", ReprojectImageTo3D);
+    NODE_SET_METHOD(obj, "findHomography", FindHomography);
 
     target->Set(NanNew("calib3d"), obj);
 }
@@ -579,6 +580,41 @@ NAN_METHOD(Calib3D::ReprojectImageTo3D)
         Local<Object> depthImageMatrix = matrixFromMat(depthImage);
 
         NanReturnValue(depthImageMatrix);
+
+
+    } catch (cv::Exception &e) {
+        const char *err_msg = e.what();
+        NanThrowError(err_msg);
+        NanReturnUndefined();
+    }
+}
+
+//cv::findHomography
+NAN_METHOD(Calib3D::FindHomography)
+{
+    NanEscapableScope();
+
+    try {
+        // Get the arguments
+
+        // Arg0, coordinates of the points in the original plane
+        cv::Mat srcPoints = matFromMatrix(args[0]);
+
+        // Arg1, coordinates of the points in the target plane
+        cv::Mat dstPoints = matFromMatrix(args[1]);
+
+        // Arg 2, method, skipped for now
+
+        // Arg3, maximum allowed reprojection error, skipped for now
+
+        // Compute the perspective transform
+        cv::Mat perspective;
+        perspective = cv::findHomography(srcPoints, dstPoints);
+
+        // Wrap the depth image
+        Local<Object> perspectiveMatrix = matrixFromMat(perspective);
+
+        NanReturnValue(perspectiveMatrix);
 
 
     } catch (cv::Exception &e) {

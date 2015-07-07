@@ -26,6 +26,8 @@ public:
     static NAN_METHOD(ComputeCorrespondEpilines);
 
     static NAN_METHOD(ReprojectImageTo3D);
+
+    static NAN_METHOD(FindHomography);
 };
 
 #endif
