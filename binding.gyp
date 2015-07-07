@@ -15,6 +15,7 @@
         "src/HighGUI.cc",
         "src/FaceRecognizer.cc",
         "src/Features2d.cc",
+        "src/FeatureDetector.cc",
         "src/BackgroundSubtractor.cc",
         "src/Constants.cc",
         "src/Calib3D.cc",

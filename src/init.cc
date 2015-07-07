@@ -9,6 +9,7 @@
 #include "HighGUI.h"
 #include "FaceRecognizer.h"
 #include "Features2d.h"
+#include "FeatureDetector.h"
 #include "Constants.h"
 #include "Calib3D.h"
 #include "ImgProc.h"
@@ -36,6 +37,7 @@ init(Handle<Object> target) {
 
    #if CV_MAJOR_VERSION >= 2 && CV_MINOR_VERSION >=4
       Features::Init(target);
+      FeatureDetector::Init(target);
       FaceRecognizerWrap::Init(target);
    #endif
 

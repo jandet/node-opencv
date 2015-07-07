@@ -11,6 +11,7 @@ class Features: public node::ObjectWrap {
     static void Init(Handle<Object> target);
 
     static NAN_METHOD(Similarity);
+    static NAN_METHOD(FindKnownObject);
 };
 
 #endif
